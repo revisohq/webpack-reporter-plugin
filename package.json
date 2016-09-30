@@ -1,0 +1,16 @@
+{
+  "name": "webpack-reporter-plugin",
+  "version": "1.0.0",
+  "description": "A simple lifecycle reporter plugin for Webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Reviso",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "fzkes": "^0.14.1",
+    "mocha": "^3.1.0"
+  },
+  "license": "MIT"
+}
