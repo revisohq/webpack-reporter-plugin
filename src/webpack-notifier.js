@@ -28,9 +28,10 @@ module.exports = /*export default */class WebpackNotifier {
 		}
 	}
 
-	createResolver(promise = Promise.resolve()) {
+	createResolver(inboundPromise = Promise.resolve()) {
 		let resolve
-		promise = promise.then(new Promise(r => {resolve = r}))
+		let outboundPromise = new Promise(r => {resolve = r})
+		let promise = inboundPromise.then(() => outboundPromise)
 		return { resolve, promise }
 	}
 }

@@ -26,5 +26,28 @@ describe('webpack-notifier.js', () => {
 				expect(testData.compiler.plugin).to.have.been.calledWith(event)
 			})
 		})
+
+		it('should not call any of the handlers', () => {
+			return new Promise(resolve => {
+				setTimeout(resolve, 10)
+			}).then(()=>{
+				expect(testData.onStart).to.not.have.been.called
+				expect(testData.onFinish).to.not.have.been.called
+			})
+		})
+
+		describe('and emitting `invalid` event', () => {
+			it('should call the `onStart` handler', done => {
+				testData.onStart.calls(done)
+				testData.compilerEvents.emit('invalid')
+			})
+		})
+
+		describe('and emitting `compile` event', () => {
+			it('should call the `onStart` handler', done => {
+				testData.onStart.calls(done)
+				testData.compilerEvents.emit('compile')
+			})
+		})
 	})
 })
