@@ -1,5 +1,7 @@
-const chai = require('chai')
+import chai from 'chai'
+import fzkes from 'fzkes'
+
 global.expect = chai.expect
 
-global.fzkes = require('fzkes')
+global.fzkes = fzkes
 chai.use(fzkes)

@@ -1,5 +1,5 @@
 import EventListener from 'events'
-import { WebpackNotifier } from '../index'
+import { WebpackNotifier } from '../src'
 
 describe('webpack-notifier.js', () => {
 	let testData

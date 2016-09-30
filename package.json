@@ -2,9 +2,11 @@
   "name": "webpack-reporter-plugin",
   "version": "1.0.0",
   "description": "A simple lifecycle reporter plugin for Webpack",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "babel-node node_modules/.bin/_mocha"
+    "test": "babel-node node_modules/.bin/_mocha",
+    "build": "babel src -d dist",
+    "prepublish": "npm run build"
   },
   "author": "Reviso",
   "devDependencies": {

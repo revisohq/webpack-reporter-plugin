@@ -1,4 +1,4 @@
-module.exports = /*export default */class WebpackNotifier {
+export default class WebpackNotifier {
 	constructor({ onStart = ()=>{}, onFinish = (report)=>{} } = {}) {
 		this.onStart = onStart
 		this.onFinish = onFinish

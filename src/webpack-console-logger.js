@@ -1,7 +1,6 @@
-//import WebpackNotifier from './webpack-notifier'
-const WebpackNotifier = require('./webpack-notifier')
+import WebpackNotifier from './webpack-notifier'
 
-module.exports = /*export default */class WebpackConsoleLogger extends WebpackNotifier {
+export default class WebpackConsoleLogger extends WebpackNotifier {
 	constructor() {
 		super({
 			onStart: () => {
