@@ -1,6 +1,7 @@
 import { stdout as singleLineLog } from 'single-line-log'
 
 import WebpackNotifier from './webpack-notifier'
+import relativizeFilename from './relativize-filename'
 
 function getTime() {
 	var now = new Date();
@@ -20,6 +21,15 @@ export default class WebpackConsoleLogger extends WebpackNotifier {
 				log(getTime() + ': Starting build')
 			},
 			onFinish: ({ warnings = [], errors = [] } = {}) => {
+				let formattedErrors = errors
+					.map(x => {
+						let message = x.message
+						let file = x.module.userRequest
+						let relativeFilename = relativizeFilename(file)
+						return `${message}\n  in ${relativeFilename}`
+					})
+					.join('\n')
+
 				let lines = [
 					formattedErrors,
 					`Webpack finished. ${warnings.length} warning(s), ${errors.length} error(s)`,
