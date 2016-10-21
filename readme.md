@@ -44,3 +44,9 @@ const webpackConfig = {
 	...
 }
 ```
+
+Note: If the webpack CLI is used, then it also logs the results. This can be
+avoided by running webpack through node:
+
+- `webpack` --> `node -e "require('webpack')(require('./webpack.config'), function(){})"`
+- `webpack --watch` --> `node -e "require('webpack')(require('./webpack.config')).watch({}, function(){})"`
