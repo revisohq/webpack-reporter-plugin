@@ -12,6 +12,10 @@ function getTime() {
 		.join(':');
 }
 
+function pluralize(count, word) {
+	return `${count} ${word}${count == 1 ? '' : 's'}`
+}
+
 export default class WebpackConsoleLogger extends WebpackNotifier {
 	constructor({ useSingleLine = true, keepOldBuildMessages = false } = {}) {
 		const log = useSingleLine ? message => singleLineLog(message + '\n') : console.log.bind(console)
@@ -25,7 +29,7 @@ export default class WebpackConsoleLogger extends WebpackNotifier {
 
 				let lines = [
 					formattedErrors.join('\n'),
-					`Webpack finished. ${warnings.length} warning(s), ${errors.length} error(s)`,
+					`Webpack finished. ${pluralize(warnings.length, 'warning')}, ${pluralize(errors.length, 'error')}`,
 				]
 				log(lines.map(x => `${getTime()}: ${x}`).join('\n'))
 				if(useSingleLine && keepOldBuildMessages) {
