@@ -1,7 +1,7 @@
 import { stdout as singleLineLog } from 'single-line-log'
 
 import WebpackNotifier from './webpack-notifier'
-import formatErrors from './format-errors'
+import format from './format'
 
 function getTime() {
 	var now = new Date();
@@ -25,12 +25,11 @@ export default class WebpackConsoleLogger extends WebpackNotifier {
 				log(getTime() + ': Starting build')
 			},
 			onFinish: ({ warnings = [], errors = [] } = {}) => {
-				let formattedErrors = formatErrors(errors)
-
 				let lines = [
-					formattedErrors.join('\n'),
+					...format(warnings),
+					...format(errors),
 					`Webpack finished. ${pluralize(warnings.length, 'warning')}, ${pluralize(errors.length, 'error')}`,
-				]
+				].map(x => x.trim()).filter(x => x.length > 0)
 				log(lines.map(x => `${getTime()}: ${x}`).join('\n'))
 				if(useSingleLine && keepOldBuildMessages) {
 					console.log('')

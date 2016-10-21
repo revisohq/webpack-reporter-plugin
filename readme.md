@@ -24,7 +24,7 @@ const webpackConfig = {
 ### The customizable way
 
 ```js
-import { WebpackNotifier, formatErrors } from 'webpack-reporter-plugin'
+import { WebpackNotifier, format } from 'webpack-reporter-plugin'
 
 const webpackConfig = {
 	...
@@ -34,10 +34,8 @@ const webpackConfig = {
 				log('webpack started building')
 			},
 			onFinish: ({ warnings, errors }) => {
-				// Turns the list of errors into a list of formatted strings
-				let formattedErrors = formatErrors(errors)
-
-				log(`webpack finished`, { warnings, formattedErrors })
+				// Turns the list of warnings and errors into a list of formatted strings
+				log(`webpack finished`, { format(warnings), format(errors) })
 			},
 		}),
 	],
