@@ -19,9 +19,17 @@ export default class WebpackNotifier {
 
 	createThrottle() {
 		let startResolver = this.createResolver()
-		startResolver.promise.then(() => this.onStart())
+		startResolver.promise
+			.then(() => this.onStart())
+			.catch(error => {
+				console.error('onStart failed: ' + (error.stack || error.message || error))
+				// This promise never resolves. This is on purpose
+				return new Promise(() => {})
+			})
 		let stopResolver = this.createResolver(startResolver.promise)
-		stopResolver.promise.then(report => this.onFinish(report))
+		stopResolver.promise
+			.then(report => this.onFinish(report))
+			.catch(error => console.error('onFinish failed: ' + (error.stack || error.message || error)))
 		return {
 			onStart: startResolver.resolve,
 			onStop: stopResolver.resolve,
