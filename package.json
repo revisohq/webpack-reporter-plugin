@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/revisohq/webpack-reporter-plugin#readme",
   "engines": {
-    "node": "^4.2.6 || ^6.9.1"
+    "node": "^4.2.6 || >=6.9.1"
   },
   "author": "Reviso International ApS",
   "license": "MIT"
