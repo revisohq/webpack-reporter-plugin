@@ -4,9 +4,9 @@
   "description": "A simple lifecycle reporter plugin for Webpack",
   "main": "dist/index.js",
   "scripts": {
-    "test": "babel-node node_modules/.bin/_mocha",
+    "test": "babel-node node_modules/mocha/bin/_mocha",
     "build": "babel src -d dist",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "react-dev-utils": "^5.0.2",
