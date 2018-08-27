@@ -17,6 +17,9 @@ Usage
 
 ### Interface
 
+`WebpackNotifier` exports [webpack stats](https://webpack.js.org/api/stats/),
+its content is available through the `onFinish` callback.
+
 ```js
 // An easy and opiniated way to set up the reporter.
 export class WebpackConsoleLogger {
@@ -26,13 +29,13 @@ export class WebpackConsoleLogger {
 // A customizable way of setting up the reporter. The callbacks are called
 // at the appropriate time in the Webpack build lifecycle.
 export class WebpackNotifier {
-	constructor({ onStart = ()=>{}, onFinish = ({ warnings, errors }) => {} })
+	constructor({ onStart = ()=>{}, onFinish = (jsonWebpackStats) => {} })
 }
 
 // An easy and opiniated way of formatting the errors and warnings that the
 // `WebpackNotifier` passes on to the `onFinish` callback.
 // It returns a list of pre-formatted strings.
-export function format(list)
+export function format(jsonWebpackStats)
 ```
 
 
@@ -82,9 +85,10 @@ const webpackConfig = {
 			onStart: () => {
 				log('webpack started building')
 			},
-			onFinish: ({ warnings, errors }) => {
+			onFinish: (jsonWebpackStats) => {
 				// Turns the list of warnings and errors into a list of formatted strings
-				log(`webpack finished`, { warnings: format(warnings), errors: format(errors) })
+				const { warnings, errors } = format(jsonWebpackStats)
+				log(`webpack finished`, { warnings, errors })
 			},
 		}),
 	],
