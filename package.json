@@ -9,6 +9,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
+    "react-dev-utils": "^5.0.2",
     "single-line-log": "^1.1.2"
   },
   "devDependencies": {

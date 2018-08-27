@@ -1,3 +1,5 @@
+import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages' 
+
 export default class WebpackNotifier {
 	constructor({ onStart = ()=>{}, onFinish = (report)=>{} } = {}) {
 		this.onStart = onStart
@@ -10,7 +12,8 @@ export default class WebpackNotifier {
 		compiler.plugin('invalid', () => {throttle.onStart()})
 		compiler.plugin('compile', () => {throttle.onStart()})
 		compiler.plugin('done', stats => {
-			const { errors, warnings } = stats.compilation
+			const jsonStats = stats.toJson({}, true)
+			const { warnings, errors } = formatWebpackMessages(jsonStats)
 			throttle.onStop({ warnings, errors })
 			throttle = this.createThrottle()
 		})
