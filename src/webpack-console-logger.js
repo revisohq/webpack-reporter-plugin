@@ -25,17 +25,15 @@ export default class WebpackConsoleLogger extends WebpackNotifier {
 			},
 			onFinish: (jsonStats = {}) => {
 				const { errors, warnings } = format(jsonStats)
-				const time = getTime()
+				const time = `${getTime()}: `
+				const result = errors.length > 0
+					? `✘ Build failed, ${pluralize(errors.length, 'error')}`
+					: '✔ Build successful'
+				const warningsText = warnings.length > 0
+					? ', ' + pluralize(warnings.length, 'warning') + ' found.'
+					: ''
 
-				if (errors.length > 0) {
-					errors.forEach(e => console.log(e))
-					console.log(`${time}: Build failed, ${pluralize(errors.length, 'error')} found.`)
-				} else if (warnings.length > 0) {
-					warnings.forEach(w => console.log(w))
-					console.log(`${time}: Build complete, ${pluralize(warnings.length, 'warning')} found.`)
-				} else {
-					console.log(`${time}: Build successful.`)
-				}
+				log([...errors, ...warnings, time + result + warningsText].join('\n'))
 
 				if (useSingleLine && keepOldBuildMessages) {
 					console.log('')
