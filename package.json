@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "babel-node node_modules/mocha/bin/_mocha",
+    "test-teamcity": "npm test -- --reporter mocha-teamcity-reporter",
     "build": "babel src -d dist",
     "prepack": "npm run build"
   },
@@ -21,7 +22,8 @@
     "babel-plugin-transform-es2015-spread": "^6.8.0",
     "chai": "^4.1.2",
     "fzkes": "^0.15.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "mocha-teamcity-reporter": "^2.4.0"
   },
   "repository": {
     "type": "git",
