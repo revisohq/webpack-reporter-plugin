@@ -95,3 +95,25 @@ const webpackConfig = {
 	...
 }
 ```
+
+Migrating from v1 to v2
+-----------------------
+
+There are some breaking changes to the way that the `onFinish()` function works. The upgrade-path is quite minor though:
+
+*Old code*:
+```js
+onFinish({ warnings = [], errors = [] }) {
+  const formattedWarnings = format(warnings)
+  const formattedErrors = format(errors)
+  ... use the formatted data
+}
+```
+
+*New code*:
+```js
+onFinish(stats) {
+  const { warnings, errors } = format(stats)
+  ... use the formatted data
+}
+```
