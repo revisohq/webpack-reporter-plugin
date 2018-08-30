@@ -1,3 +1,4 @@
 .babelrc
 src/
 test/
+teamcity_install_node/
