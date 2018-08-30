@@ -4,11 +4,13 @@
   "description": "A simple lifecycle reporter plugin for Webpack",
   "main": "dist/index.js",
   "scripts": {
-    "test": "babel-node node_modules/.bin/_mocha",
+    "test": "babel-node node_modules/mocha/bin/_mocha",
+    "test-teamcity": "npm test -- --reporter mocha-teamcity-reporter",
     "build": "babel src -d dist",
-    "prepublish": "npm run build"
+    "prepack": "npm run build"
   },
   "dependencies": {
+    "react-dev-utils": "^5.0.2",
     "single-line-log": "^1.1.2"
   },
   "devDependencies": {
@@ -18,9 +20,10 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
     "babel-plugin-transform-es2015-parameters": "^6.16.0",
     "babel-plugin-transform-es2015-spread": "^6.8.0",
-    "chai": "^3.5.0",
-    "fzkes": "^0.14.1",
-    "mocha": "^3.1.0"
+    "chai": "^4.1.2",
+    "fzkes": "^0.15.0",
+    "mocha": "^5.2.0",
+    "mocha-teamcity-reporter": "^2.4.0"
   },
   "repository": {
     "type": "git",
@@ -36,7 +39,8 @@
   },
   "homepage": "https://github.com/revisohq/webpack-reporter-plugin#readme",
   "engines": {
-    "node": "^4.2.6 || >=6.9.1"
+    "node": "^10.9.0",
+    "npm": "^6.2.0"
   },
   "author": "Reviso International ApS",
   "license": "MIT"

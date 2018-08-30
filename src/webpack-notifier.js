@@ -10,8 +10,8 @@ export default class WebpackNotifier {
 		compiler.plugin('invalid', () => {throttle.onStart()})
 		compiler.plugin('compile', () => {throttle.onStart()})
 		compiler.plugin('done', stats => {
-			const { errors, warnings } = stats.compilation
-			throttle.onStop({ warnings, errors })
+			const jsonStats = stats.toJson({}, true)
+			throttle.onStop(jsonStats)
 			throttle = this.createThrottle()
 		})
 		compiler.plugin('failed', err => {console.error('error', err)})
