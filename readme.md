@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Moved to https://biosphere.teamsystem.com/reviso/services/npm/webpack-reporter-plugin
+
 webpack-reporter-plugin
 =======================
 
